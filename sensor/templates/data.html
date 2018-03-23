@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block link %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sensor.css' %}">
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1>Sensor Data</h1>
+    <canvas id="sensor-data" width="500" height="400"></canvas>
+{% endblock %}
