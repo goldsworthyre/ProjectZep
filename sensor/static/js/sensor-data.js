@@ -9,17 +9,30 @@ var canvas = null;
 var ctx = null;
 
 $(document).ready(function(){
-    canvas = document.getElementById("sensor-data");
-    ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#22C3DD";
+    initializeCanvas();
     window.setInterval(getSensorData, timerValue)
 });
+
+function initializeCanvas(){
+    canvas = document.getElementById("sensor-data");
+    var accelRequest = $.get('/sensor/sensor_constants', function(data){
+            var accelerometerConfig = data.accelerometer;
+            if(accelerometerConfig) {
+                var canvasConfig = accelerometerConfig.canvas;
+                if (canvasConfig) {
+                    ctx = canvas.getContext(canvasConfig.dimension);
+                    ctx.fillStyle = canvasConfig.color;
+                }
+            }
+        }
+    );
+}
 
 function getSensorData(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawOuterBox();
     drawCoordinatePlane();
-    drawSensorPoint(ctx);
+    getAccelCoordinates();
 }
 
 function drawCoordinatePlane(){
@@ -39,10 +52,19 @@ function drawLine(x1, y1, x2, y2){
     ctx.stroke();
 }
 
-function drawSensorPoint(){
+// Get the Accelerometer coordinates via an ajax request.
+function getAccelCoordinates(){
+    var accelRequest = $.get('/sensor/accel', function(data){
+            drawSensorPoint(data);
+        }
+    );
+}
+
+// Draw the data point for where the accelerometer is.
+function drawSensorPoint(data){
     ctx.beginPath();
-    var x = Math.floor(Math.random() * 200);
-    var y = Math.floor(Math.random() * 250);
+    var x = data.x;
+    var y = data.y;
     var radius = 5;
     var startAngle = 0;
     var endAngle = Math.PI * 2;
