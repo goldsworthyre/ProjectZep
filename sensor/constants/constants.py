@@ -28,8 +28,8 @@ SENSOR_CONSTANTS = {
             'data_url': '/sensor/accel',
             'line_width':10,
             'canvas': {
-                'width': 500,
-                'height': 400,
+                'width': 300,
+                'height': 200,
                 'zed': 500,
                 'color': '#FF0000',
                 'dimension': '2d',
