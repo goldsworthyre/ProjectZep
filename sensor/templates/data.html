@@ -12,6 +12,10 @@
     <script src="{% static 'js/sensor-data.js' %}" type="text/javascript"></script>
 {% endblock %}
 
+{% block body_attrs %}
+    <body onload="initializeCanvas('{{ sensor_data_url }}');">
+{% endblock %}
+
 {% block content %}
     <h1>Sensor Data</h1>
     {% for sensor in sensors %}

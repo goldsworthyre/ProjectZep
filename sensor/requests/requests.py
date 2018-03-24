@@ -15,6 +15,7 @@ class SensorRequest(Request):
         self.sensors = []
         self.initialize_defaults()
         self.initialize_sensor_data()
+        self.initialize_urls()
         super().__init__(request)
 
     def initialize_defaults(self):
@@ -26,8 +27,11 @@ class SensorRequest(Request):
         for sensor in sensors:
             self.sensors.append(sensor)
 
+    def initialize_urls(self):
+        self.sensor_data_url = self.get_constant_value(SENSOR_CONSTANTS, 'sensor_data_url')
+
     def render(self):
-        self.context.update({'sensors': self.sensors, 'defaults': self.defaults})
+        self.context.update({'sensors': self.sensors, 'defaults': self.defaults, 'sensor_data_url': self.sensor_data_url})
         return render(self.request, 'data.html', self.context)
 
 
