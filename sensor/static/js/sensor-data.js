@@ -10,7 +10,6 @@ var ctx = null;
 
 $(document).ready(function(){
     initializeCanvas();
-    window.setInterval(getSensorData, timerValue)
 });
 
 function initializeCanvas(){
@@ -28,6 +27,7 @@ function initializeCanvas(){
                                 ctx.fillStyle = canvasConfig.color;
                             }
                         }
+                        window.setInterval(getSensorData(i), timerValue)
                     }
                 }
             }
@@ -35,11 +35,11 @@ function initializeCanvas(){
     );
 }
 
-function getSensorData(){
+function getSensorData(sensor_number){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawOuterBox();
     drawCoordinatePlane();
-    getAccelCoordinates();
+    getAccelCoordinates(sensor_number);
 }
 
 function drawCoordinatePlane(){
@@ -60,8 +60,8 @@ function drawLine(x1, y1, x2, y2){
 }
 
 // Get the Accelerometer coordinates via an ajax request.
-function getAccelCoordinates(){
-    var accelRequest = $.get('/sensor/accel', function(data){
+function getAccelCoordinates(sensor_number){
+    var accelRequest = $.get('/sensor/accel', {sensor_number: sensor_number}, function(data){
             drawSensorPoint(data);
         }
     );

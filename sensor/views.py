@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from sensor.constants.constants import SENSOR_CONSTANTS
-from sensor.requests.requests import SensorRequest
+from sensor.requests.requests import SensorRequest, SensorDataRequest
 
 
 def data(request):
@@ -15,13 +15,7 @@ def data(request):
 
 # Get the Accelerometer data from the sensor.
 def accel(request):
-    x = random.randint(0, 500)
-    y = random.randint(0, 400)
-    z = random.randint(0, 500)
-
-    data = {'x': x, 'y': y, 'z': z}
-
-    return JsonResponse(data)
+    return SensorDataRequest(request).render()
 
 
 def sensor_constants(request):
