@@ -6,12 +6,11 @@ from django.shortcuts import render
 
 # Create your views here.
 from sensor.constants.constants import SENSOR_CONSTANTS
+from sensor.requests.requests import SensorRequest
 
 
 def data(request):
-    context = {'canvasWidth': SENSOR_CONSTANTS['accelerometer']['canvas']['width'],
-               'canvasHeight': SENSOR_CONSTANTS['accelerometer']['canvas']['height'],}
-    return render(request, 'data.html', context)
+    return SensorRequest(request).render()
 
 
 # Get the Accelerometer data from the sensor.

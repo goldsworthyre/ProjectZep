@@ -16,12 +16,19 @@ $(document).ready(function(){
 function initializeCanvas(){
     canvas = document.getElementById("sensor-data");
     var accelRequest = $.get('/sensor/sensor_constants', function(data){
-            var accelerometerConfig = data.accelerometer;
-            if(accelerometerConfig) {
-                var canvasConfig = accelerometerConfig.canvas;
-                if (canvasConfig) {
-                    ctx = canvas.getContext(canvasConfig.dimension);
-                    ctx.fillStyle = canvasConfig.color;
+            var sensors = data.sensors;
+            if(sensors){
+                if(sensors.length > 0){
+                    for(i=0; i<sensors.length;i++){
+                        var sensor = sensors[i];
+                        if(sensor.canvas){
+                            var canvasConfig = sensor.canvas;
+                            if(canvasConfig){
+                                ctx = canvas.getContext(canvasConfig.dimension);
+                                ctx.fillStyle = canvasConfig.color;
+                            }
+                        }
+                    }
                 }
             }
         }

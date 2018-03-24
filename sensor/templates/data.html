@@ -14,6 +14,20 @@
 
 {% block content %}
     <h1>Sensor Data</h1>
-    <h3>Accelerometer</h3>
-    <canvas id="sensor-data" width="{{ canvasWidth }}" height="{{ canvasHeight }}"></canvas>
+    {% for sensor in sensors %}
+        {% if sensor.name %}
+            <h3>{{ sensor.name }}</h3>
+        {% endif %}
+        <canvas id="sensor-data" width="{% if sensor.canvas.width %}
+                                            {{ sensor.canvas.width}}
+                                        {% else %}
+                                            {{ defaults.default_canvas_width }}
+                                        {% endif %}"
+                                height="{% if sensor.canvas.height %}
+                                            {{ sensor.canvas.height }}
+                                        {% else %}
+                                            {{ defaults.default_canvas_height }}
+                                        {% endif %}">
+        </canvas>
+    {% endfor %}
 {% endblock %}
