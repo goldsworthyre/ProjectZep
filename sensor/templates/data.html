@@ -18,7 +18,7 @@
         {% if sensor.name %}
             <h3>{{ sensor.name }}</h3>
         {% endif %}
-        <canvas id="sensor-data" width="{% if sensor.canvas.width %}
+        <canvas {% if sensor.id %}id="{{ sensor.id }}"{% endif %} width="{% if sensor.canvas.width %}
                                             {{ sensor.canvas.width}}
                                         {% else %}
                                             {{ defaults.default_canvas_width }}

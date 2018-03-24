@@ -33,6 +33,7 @@ class SensorRequest(Request):
 
 class SensorDataRequest(SensorRequest):
     def __init__(self, request):
+        self.sensor_number = 0
         if 'sensor_number' in request.GET:
             self.sensor_number = int(request.GET['sensor_number'])
         super().__init__(request)
