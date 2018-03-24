@@ -10,6 +10,7 @@ SENSOR_CONSTANTS = {
             'canvas':{
                 'width': 1000,
                 'height': 900,
+                'zed': 500,
                 'color': '#22C3DD',
                 'dimension': '2d',
             }
