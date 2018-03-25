@@ -25,15 +25,19 @@ SENSOR_CONSTANTS = {
         {
             'name': 'Camera',
             'id': 'camera',
-            'data_url': '/sensor/accel',
+            'data_url': 'http://localhost:8090/test.webm',
             'line_width':10,
-            'canvas': {
-                'width': 300,
-                'height': 200,
-                'zed': 500,
-                'color': '#FF0000',
-                'dimension': '2d',
-            }
+            'type': 'stream',
         },
     ],
 }
+
+CONTROL_CONSTANTS = {
+                        'controls_url': '/control/config',
+                        'keyboard':{
+                            'FORWARD': 87,
+                            'RIGHT': 68,
+                            'LEFT': 65,
+                            'BACK': 83,
+                        },
+                     }
