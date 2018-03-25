@@ -27,17 +27,21 @@
                     {% if sensor.name %}
                         <h3>{{ sensor.name }}</h3>
                     {% endif %}
-                    <canvas {% if sensor.id %}id="{{ sensor.id }}"{% endif %} width="{% if sensor.canvas.width %}
-                                                        {{ sensor.canvas.width}}
-                                                    {% else %}
-                                                        {{ defaults.default_canvas_width }}
-                                                    {% endif %}"
-                                            height="{% if sensor.canvas.height %}
-                                                        {{ sensor.canvas.height }}
-                                                    {% else %}
-                                                        {{ defaults.default_canvas_height }}
-                                                    {% endif %}">
-                    </canvas>
+                    {% if sensor.type == 'stream' %}
+                        <video src="{{ sensor.data_url }}" controls></video>
+                    {% else %}
+                        <canvas {% if sensor.id %}id="{{ sensor.id }}"{% endif %} width="{% if sensor.canvas.width %}
+                                                            {{ sensor.canvas.width}}
+                                                        {% else %}
+                                                            {{ defaults.default_canvas_width }}
+                                                        {% endif %}"
+                                                height="{% if sensor.canvas.height %}
+                                                            {{ sensor.canvas.height }}
+                                                        {% else %}
+                                                            {{ defaults.default_canvas_height }}
+                                                        {% endif %}">
+                        </canvas>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
