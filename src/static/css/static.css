@@ -1,6 +1,6 @@
 @font-face {
     font-family: comicbook;
-    src: url('/static/font/zeppelin.ttf');
+    src: url('/src/static/font/zeppelin.ttf');
 }
 
 body{
